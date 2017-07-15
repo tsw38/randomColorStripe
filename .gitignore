@@ -12,6 +12,8 @@
 /**/*.css
 .sass-cache
 /api
+/public/css/*
+/public/js/*
 
 # misc
 .DS_Store

@@ -13,7 +13,7 @@ const PATHS = {
   src_api: path.resolve(__dirname, 'src/api/**/*.js'),
   endpoints: path.resolve(__dirname, 'api/**/*.js'),
   sass: path.resolve(__dirname, 'src/sass/**/*.scss'),
-  react: path.resolve(__dirname, 'src/react/**/*.js'),
+  frontend: path.resolve(__dirname, 'src/frontend/**/*.js'),
   api: path.resolve(__dirname, 'api')
 }
 
@@ -45,10 +45,10 @@ gulp.task('api', shell.task([
 ]));
 
 gulp.task('webpack',()=>{
-  return gulp.src('./src/react/index.js')
+  return gulp.src('./src/frontend/index.js')
   .pipe(webpack({
     watch: false,
-    entry: PATHS.src + "/react/index.js",
+    entry: PATHS.src + "/frontend/index.js",
     output: {
       path: PATHS.bundle,
       filename: 'bundle.js'
@@ -79,7 +79,7 @@ gulp.task('restart', ()=>{express.start.bind(express)(); });
 
 
 gulp.task('watch', ()=>{
-  gulp.watch(PATHS.react, ['webpack','restart']);
+  gulp.watch(PATHS.frontend, ['webpack','restart']);
   gulp.watch(PATHS.src_api, ['webpack','restart']);
   gulp.watch(PATHS.endpoints, ['api','restart']);
   gulp.watch(PATHS.sass, ['sass']);
