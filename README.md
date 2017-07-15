@@ -1,8 +1,13 @@
 # Generic Babel Scaffold
 
-A Simple scaffold for all of my basic page setups
+To illustrate a Rainbow stripe element on a page
 
 ## Getting Started
+
+There are 3 url parameters:
+_style_: _(Optional)_ random
+_stripes_: _(Optional)_ any number from 0 > infinity (do not go too high or your browser will crash)
+_img_: _(Optional)_ any url location of an image asset
 
 ### Prerequisites
 ensure you create a *.env* file in the root containing a _APP_ROOT_ variable for the server

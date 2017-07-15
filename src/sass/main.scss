@@ -5,7 +5,14 @@
 // @import url('https://fonts.googleapis.com/css?family=Sanchez');
 
 html,body{height:100%;width:100%;}
+.wrapper{height:100%;width:100%;}
 #app{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+
   height:100%;
   width:100%;
   @include display-flex;
@@ -17,60 +24,52 @@ html,body{height:100%;width:100%;}
     height:100%;
     box-shadow: 1px 0px 2px 1px rgba(0,0,0,0.5);
 
+    // background-image: ;
+    background-attachment:fixed !important;
+    background-repeat:no-repeat !important;
+    background-size:cover !important;
+    background-blend-mode:soft-light !important;
+    filter: contrast(170%);
+
     &.pink{
       background:#9c0c4a;
-      background: linear-gradient(-25deg,darken(#9c0c4a,15%),#9c0c4a 50%, lighten(#9c0c4a,15%));
+      background: url(../assets/3.jpg), linear-gradient(-25deg,darken(#9c0c4a,25%),#9c0c4a 50%, lighten(#9c0c4a,15%));
     }
     &.red{
       background:#9f0610;
-      background: linear-gradient(25deg,darken(#9f0610,15%),#9f0610 50%, lighten(#9f0610,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#9f0610,25%),#9f0610 50%, lighten(#9f0610,15%));
     }
     &.orange{
       background:#c64811;
-      background: linear-gradient(25deg,darken(#c64811,15%),#c64811 50%, lighten(#c64811,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#c64811,25%),#c64811 50%, lighten(#c64811,15%));
     }
     &.light-orange{
       background:#d2771c;
-      background: linear-gradient(25deg,darken(#d2771c,15%),#d2771c 50%, lighten(#d2771c,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#d2771c,25%),#d2771c 50%, lighten(#d2771c,15%));
     }
     &.yellow{
       background:#e4c930;
-      background: linear-gradient(25deg,darken(#e4c930,15%),#e4c930 50%, lighten(#e4c930,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#e4c930,25%),#e4c930 50%, lighten(#e4c930,15%));
     }
     &.lime{
       background:#86c035;
-      background: linear-gradient(25deg,darken(#86c035,15%),#86c035 50%, lighten(#86c035,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#86c035,25%),#86c035 50%, lighten(#86c035,15%));
     }
     &.green{
       background:#56974d;
-      background: linear-gradient(25deg,darken(#56974d,15%),#56974d 50%, lighten(#56974d,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#56974d,25%),#56974d 50%, lighten(#56974d,15%));
     }
     &.sky-blue{
       background:#5ca2cd;
-      background: linear-gradient(25deg,darken(#5ca2cd,15%),#5ca2cd 50%, lighten(#5ca2cd,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#5ca2cd,25%),#5ca2cd 50%, lighten(#5ca2cd,15%));
     }
     &.blue{
       background:#3053d9;
-      background: linear-gradient(25deg,darken(#3053d9,15%),#3053d9 50%, lighten(#3053d9,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#3053d9,25%),#3053d9 50%, lighten(#3053d9,15%));
     }
     &.dark-blue{
       background:#2315c6;
-      background: linear-gradient(25deg,darken(#2315c6,15%),#2315c6 50%, lighten(#2315c6,15%));
+      background: url(../assets/3.jpg), linear-gradient(25deg,darken(#2315c6,25%),#2315c6 50%, lighten(#2315c6,15%));
     }
   }
 }
-
-
-    // html{//   font-size:33px;
-//   font-family: 'Sanchez', serif;
-// }
-
-// body{
-//   // margin:0.6060em 0.6060em 0 1.212em;
-// }
-
-
-// @import "./menu";
-
-
-// @import "./pages/index";

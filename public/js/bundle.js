@@ -47,9 +47,9 @@
 	'use strict';
 
 	var randomStripes = function () {
-	  var stripeCount = 50;
 	  var lastColorIndex = 0;
 	  var currentColorIndex = 0;
+	  var windowQuery = {};
 	  var colors = ['pink', 'red', 'orange', 'light-orange', 'yellow', 'lime', 'green', 'sky-blue', 'blue', 'dark-blue'];
 
 	  var getRandomNumber = function getRandomNumber(max) {
@@ -64,9 +64,24 @@
 	    }
 	  };
 
-	  var generateStripes = function generateStripes(type) {
-	    switch (type) {
-	      case 'random':
+	  var generateStripes = function generateStripes(query) {
+	    var stripeCount = query && query.stripes && _.isNumber(parseInt(query.stripes, 10)) ? parseInt(query.stripes, 10) : 50;
+	    var updatedImage = query && query.img && _.isString(query.img) ? query.img : '';
+	    console.log(updatedImage);
+
+	    var defaultHelper = function defaultHelper() {
+	      for (var str = 0; str < stripeCount; str++) {
+	        var $div = $("<div>");
+	        $div.addClass('stripe ' + colors[str % 10] + ' _' + stripeCount);
+	        $div.css({
+	          'width': 'calc(100%/' + stripeCount + ')',
+	          'z-index': stripeCount - str
+	        });
+	        $div.appendTo('#app');
+	      }
+	    };
+	    if (query && query.style) {
+	      if (/random/.test(query.style)) {
 	        for (var str = 0; str < stripeCount; str++) {
 	          var $div = $("<div>");
 	          $div.addClass('stripe ' + colors[nonConsectiveColors(getRandomNumber(colors.length - 1))] + ' _' + stripeCount);
@@ -76,23 +91,37 @@
 	          });
 	          $div.appendTo('#app');
 	        }
-	        break;
-	      default:
-	        for (var _str = 0; _str < stripeCount; _str++) {
-	          var $div = $("<div>");
-	          $div.addClass('stripe ' + colors[_str % 10] + ' _' + stripeCount);
-	          $div.css({
-	            'width': 'calc(100%/' + stripeCount + ')',
-	            'z-index': stripeCount - _str
-	          });
-	          $div.appendTo('#app');
-	        }
-	        break;
+	      } else {
+	        defaultHelper();
+	      }
+	    } else {
+	      defaultHelper();
+	    }
+
+	    if (updatedImage.length) {
+	      $.each($('.stripe'), function (index, elem) {
+	        console.log($(elem).css('background', $(elem).css('background').replace(/\".+\"/, '"' + updatedImage + '"')));
+	        console.log($(elem).attr('style'));
+	      });
+	    }
+	  };
+
+	  var generateProperQuery = function generateProperQuery() {
+	    windowQuery = window.location.search;
+	    if (windowQuery) {
+	      windowQuery = windowQuery.replace(/\?/g, '').split("&");
+	      var temp = {};
+	      _.each(windowQuery, function (query) {
+	        query = query.split("=");
+	        temp[query[0]] = query[1];
+	      });
+	      windowQuery = temp;
 	    }
 	  };
 
 	  var init = function init() {
-	    generateStripes('random');
+	    generateProperQuery();
+	    generateStripes(windowQuery);
 	  };
 	  return init();
 	}();
