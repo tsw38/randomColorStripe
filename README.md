@@ -4,13 +4,13 @@ To illustrate a Rainbow stripe element on a page
 
 ## Getting Started
 
-There are 4 url parameters:
-Option | Default | Values
---- | --- | ---
-style |  | random
-stripes | 50 | any integer value
-img | local jpg | a url to an image asset
-background | true | true/false
+There are 4 optional url parameters:
+| Option     | Default   | Values                  |
+| ---------- | :-------: | ----------------------- |
+| style      |           | random                  |
+| stripes    | 50        | any integer value       |
+| img        | local jpg | a url to an image asset |
+| background | true      | true/false              |
 
 ### Prerequisites
 ensure you create a *.env* file in the root containing a _APP_ROOT_ variable for the server
