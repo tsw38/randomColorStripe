@@ -47,19 +47,22 @@
 	'use strict';
 
 	var randomStripes = function () {
-	  var lastColorIndex = 0;
-	  var currentColorIndex = 0;
+	  var lastColorIndexes = [0, 0, 0, 0];
 	  var windowQuery = {};
 	  var colors = ['pink', 'red', 'orange', 'light-orange', 'yellow', 'lime', 'green', 'sky-blue', 'blue', 'dark-blue'];
 
 	  var getRandomNumber = function getRandomNumber(max) {
 	    return Math.floor(Math.random() * (max + 1));
 	  };
+
 	  var nonConsectiveColors = function nonConsectiveColors(newIndex) {
-	    if (lastColorIndex === newIndex) {
+	    if (lastColorIndexes[0] === newIndex || lastColorIndexes[1] === newIndex || lastColorIndexes[2] === newIndex || lastColorIndexes[3] === newIndex) {
 	      return nonConsectiveColors(getRandomNumber(colors.length - 1));
 	    } else {
-	      lastColorIndex = newIndex;
+	      lastColorIndexes[3] = lastColorIndexes[2];
+	      lastColorIndexes[2] = lastColorIndexes[1];
+	      lastColorIndexes[1] = lastColorIndexes[0];
+	      lastColorIndexes[0] = newIndex;
 	      return newIndex;
 	    }
 	  };
@@ -67,7 +70,7 @@
 	  var generateStripes = function generateStripes(query) {
 	    var stripeCount = query && query.stripes && _.isNumber(parseInt(query.stripes, 10)) ? parseInt(query.stripes, 10) : 50;
 	    var updatedImage = query && query.img && _.isString(query.img) ? query.img : '';
-	    console.log(updatedImage);
+	    var noBackground = query && query.background && _.isString(query.background) ? query.background : '';
 
 	    var defaultHelper = function defaultHelper() {
 	      for (var str = 0; str < stripeCount; str++) {
@@ -82,6 +85,9 @@
 	    };
 	    if (query && query.style) {
 	      if (/random/.test(query.style)) {
+	        lastColorIndexes = lastColorIndexes.map(function (index) {
+	          return getRandomNumber(colors.length - 1);
+	        }); //start indexes as random
 	        for (var str = 0; str < stripeCount; str++) {
 	          var $div = $("<div>");
 	          $div.addClass('stripe ' + colors[nonConsectiveColors(getRandomNumber(colors.length - 1))] + ' _' + stripeCount);
@@ -98,10 +104,13 @@
 	      defaultHelper();
 	    }
 
-	    if (updatedImage.length) {
+	    if (noBackground.length && /false/.test(noBackground)) {
 	      $.each($('.stripe'), function (index, elem) {
-	        console.log($(elem).css('background', $(elem).css('background').replace(/\".+\"/, '"' + updatedImage + '"')));
-	        console.log($(elem).attr('style'));
+	        $(elem).css('background', $(elem).css('background').replace(/\".+\"/, '""'));
+	      });
+	    } else if (updatedImage.length) {
+	      $.each($('.stripe'), function (index, elem) {
+	        $(elem).css('background', $(elem).css('background').replace(/\".+\"/, '"' + updatedImage + '"'));
 	      });
 	    }
 	  };
