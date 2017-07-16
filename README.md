@@ -5,6 +5,7 @@ To illustrate a Rainbow stripe element on a page
 ## Getting Started
 
 There are 4 optional url parameters:
+
 | Option     | Default   | Values                  |
 | ---------- | :-------: | ----------------------- |
 | style      |           | random                  |
